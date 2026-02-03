@@ -1,0 +1,123 @@
+.mc-hero-anchor {
+  position: fixed;
+  left: 38.5%;
+  top: 25%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.mc-hero {
+  position: relative;
+  will-change: transform;
+}
+
+.mc-hero-circle-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mc-hero-circle-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 170, 0, 0.3);
+  animation: mc-hero-pulse-ring 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+.mc-hero-circle-ring.ring-1 {
+  width: 420px;
+  height: 420px;
+  animation-delay: 0s;
+}
+
+.mc-hero-circle-ring.ring-2 {
+  width: 480px;
+  height: 480px;
+  animation-delay: 0.5s;
+  border-color: rgba(255, 170, 0, 0.2);
+}
+
+.mc-hero-circle-ring.ring-3 {
+  width: 540px;
+  height: 540px;
+  animation-delay: 1s;
+  border-color: rgba(255, 170, 0, 0.15);
+}
+
+@keyframes mc-hero-pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.4;
+  }
+}
+
+.mc-hero-circle {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(135% 135% at 50% 0%, rgba(255, 170, 0, 0.15) 0%, rgba(255, 170, 0, 0.05) 50%, rgba(20, 20, 40, 0.4) 100%);
+  border: 2px solid rgba(255, 170, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(255, 170, 0, 0.25), inset 0 0 25px rgba(255, 170, 0, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2;
+}
+
+.mc-hero-logo {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(255, 170, 0, 0.4));
+  animation: none;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .mc-hero-anchor {
+    top: 38%;
+  }
+
+  .mc-hero-circle-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .mc-hero-circle-ring.ring-1 {
+    width: 320px;
+    height: 320px;
+  }
+
+  .mc-hero-circle-ring.ring-2 {
+    width: 360px;
+    height: 360px;
+  }
+
+  .mc-hero-circle-ring.ring-3 {
+    width: 400px;
+    height: 400px;
+  }
+
+  .mc-hero-circle {
+    width: 240px;
+    height: 240px;
+  }
+
+  .mc-hero-logo {
+    width: 150px;
+    height: 150px;
+  }
+}

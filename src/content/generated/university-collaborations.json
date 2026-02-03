@@ -1,0 +1,174 @@
+[
+  {
+    "id": "iit-delhi",
+    "institution": "IIT Delhi",
+    "city": "New Delhi",
+    "country": "India",
+    "lat": 28.545,
+    "lng": 77.1926,
+    "focusAreas": [
+      "Graph ML"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Ankur Arora"
+    ],
+    "websiteLink": "https://home.iitd.ac.in/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "ntu-singapore",
+    "institution": "NTU Singapore",
+    "city": "Singapore",
+    "country": "Singapore",
+    "lat": 1.3483,
+    "lng": 103.6831,
+    "focusAreas": [
+      "Representation learning",
+      "Federated learning",
+      "Fair & Bias"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Yatin Katyal, Maneet Singh, Nitish"
+    ],
+    "websiteLink": "https://www.ntu.edu.sg/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "mit",
+    "institution": "MIT",
+    "city": "Cambridge",
+    "country": "USA",
+    "lat": 42.3601,
+    "lng": -71.0942,
+    "focusAreas": [
+      "Post pandemic social analysis"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Aakarsh Malhotra, Ram Ganesh, Priyanka Chudasama, Soumyadeep Ghosh, Rohit Bhattacharya, Anubha Pandey, Maneet Singh"
+    ],
+    "websiteLink": "https://www.mit.edu/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "imperial-college-london",
+    "institution": "Imperial College of London",
+    "city": "London",
+    "country": "UK",
+    "lat": 51.4988,
+    "lng": -0.1749,
+    "focusAreas": [
+      "Spending forecasting"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Puspita Majumdar, Kanishk Goyal, Bhargav Pandillapalli, Raghav Sharma"
+    ],
+    "websiteLink": "https://www.imperial.ac.uk/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "university-of-windsor",
+    "institution": "University of Windsor",
+    "city": "Windsor",
+    "country": "Canada",
+    "lat": 42.3032884,
+    "lng": -83.0646957,
+    "focusAreas": [
+      "Multiple projects"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Aakarsh Malhotra"
+    ],
+    "websiteLink": "https://www.uwindsor.ca/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "university-of-toronto",
+    "institution": "University of Toronto",
+    "city": "Toronto",
+    "country": "Canada",
+    "lat": 43.657,
+    "lng": -79.3903,
+    "focusAreas": [
+      "Placeholder: this needs to be filled"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Gaurav Oberoi sidhartha"
+    ],
+    "websiteLink": "https://www.utoronto.ca/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "university-of-alberta",
+    "institution": "University of Alberta",
+    "city": "Alberta",
+    "country": "Canada",
+    "lat": 53.528319,
+    "lng": -113.523477,
+    "focusAreas": [
+      "Placeholder: this needs to be filled"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Suhas Powar"
+    ],
+    "websiteLink": "https://www.ualberta.ca/en/index.html",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "university-of-victoria",
+    "institution": "University of Victoria",
+    "city": "Victoria",
+    "country": "Canada",
+    "lat": 48.45,
+    "lng": -123.3,
+    "focusAreas": [
+      "Placeholder: this needs to be filled"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Suhas Powar"
+    ],
+    "websiteLink": "https://www.uvic.ca/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "university-of-ai-abu-dhabi",
+    "institution": "MBZ University of AI, Abu Dhabi",
+    "city": "Masdar",
+    "country": "UAE",
+    "lat": 24.43,
+    "lng": 54.62,
+    "focusAreas": [
+      "Adversarial Attacks, Federated Learning, Causality & Graph Learning"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Ankur Saraswat"
+    ],
+    "websiteLink": "https://mbzuai.ac.ae/",
+    "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "rochester-institute-of-technology-dubai",
+    "institution": "Rochester Institute of Technology, Dubai",
+    "city": "Dubai",
+    "country": "UAE",
+    "lat": 25.1311,
+    "lng": 55.3895,
+    "focusAreas": [
+      "AI & Cybersecurity"
+    ],
+    "description": "Placeholder: this needs to be filled",
+    "people": [
+      "Ankur Saraswat"
+    ],
+    "websiteLink": "https://www.rit.edu/dubai/",
+    "imagePath": "Placeholder: this needs to be filled"
+  }
+]

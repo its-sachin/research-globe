@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Tech Future Summit 2026",
+    "destination": "London, UK",
+    "description": "A global conference exploring emerging technologies, AI trends, and innovation leadership.",
+    "link": "https://example.com/tech-future-summit",
+    "imagePath": "https://picsum.photos/400/300.jpg"
+  },
+  {
+    "name": "Global Food Carnival",
+    "destination": "Singapore",
+    "description": "An international food festival featuring street food, celebrity chefs, and live music.",
+    "link": "https://example.com/global-food-carnival",
+    "imagePath": "https://picsum.photos/450/300.jpg"
+  },
+  {
+    "name": "Mountain Adventure Expo",
+    "destination": "Denver, USA",
+    "description": "Outdoor adventure exhibition with gear demos, climbing workshops, and travel talks.",
+    "link": "https://example.com/mountain-expo",
+    "imagePath": "https://picsum.photos/500/300.jpg"
+  },
+  {
+    "name": "Digital Marketing World",
+    "destination": "Berlin, Germany",
+    "description": "Industry leaders share insights on SEO, social media strategy, and performance marketing.",
+    "link": "https://example.com/digital-marketing-world",
+    "imagePath": "https://picsum.photos/600/400.jpg"
+  },
+  {
+    "name": "Art & Design Biennale",
+    "destination": "Florence, Italy",
+    "description": "A celebration of contemporary art, installations, and creative design from global artists.",
+    "link": "https://example.com/art-biennale",
+    "imagePath": "https://picsum.photos/800/600.jpg"
+  },
+  {
+    "name": "Sustainable Living Fair",
+    "destination": "Vancouver, Canada",
+    "description": "Eco-friendly products, green tech showcases, and sustainability workshops.",
+    "link": "https://example.com/sustainable-living-fair",
+    "imagePath": "https://picsum.photos/320/240.jpg"
+  },
+  {
+    "name": "Indie Game Developers Con",
+    "destination": "Tokyo, Japan",
+    "description": "Independent game creators gather to showcase projects, network, and attend dev sessions.",
+    "link": "https://example.com/indie-game-con",
+    "imagePath": "https://picsum.photos/640/480.jpg"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "NeurIPS Jailbreaking Competition",
+    "destination": "San Diego, California, United States",
+    "description": "Challenge LLM safety by crafting adversarial prompts that bypass model defenses. This track uncovers real-world vulnerabilities and helps build more robust, trustworthy Al systems.",
+    "link": "https://neurips.cc/Conferences/2024/CompetitionTrack",
+    "imagePath": "images/jailbreak.png",
+    "position": "Global Rank 2 +$3000 Prize"
+  },
+  {
+    "name": "Kaggle Jigsaw Agile Community Rules Classification",
+    "destination": "Virtual",
+    "description": "Develop models that detect Reddit comments violating community rules.The challenge tests Al's ability to understand nuanced norms and enable scalable, consistent content moderation.",
+    "link": "https://www.kaggle.com/competitions/jigsaw-agile-community-rules",
+    "imagePath": "images/jigsaw.png",
+    "position": "Rank 32/2445: Sliver Medal"
+  },
+  {
+    "name": "NeurIPS Social Deduction Track",
+    "destination": "San Diego, California, United States",
+    "description": "Build Al agents for social deduction games, requiring reasoning under uncertainty, deception detection, teamwork, and strategic communication in multi-agent environments.",
+    "link": "",
+    "imagePath": "",
+    "position": "Global Rank 05"
+  },
+  {
+    "name": "Kaggle - You Can't Please Them All",
+    "destination": "Virtual",
+    "description": "Create essays that expose weaknesses in LLM-based judging systems.The track tests the robustness of automated subjective evaluation and highlights inconsistencies across different Al judges.",
+    "link": "https://www.kaggle.com/competitions/llms-you-cant-please-them-all",
+    "imagePath": "images/cant-please.png",
+    "position": "Gold Medal"
+  },
+  {
+    "name": "Meta CRAG-MM Challenge 2025",
+    "destination": "Toronto, Canada",
+    "description": "Develop multimodal Al systems that use images and external knowledge,to answer user queries. The challenge evaluates visual understanding,retrieval, and grounded reasoning for real-world assistant tasks.",
+    "link": "https://www.aicrowd.com/challenges/meta-crag-mm-challenge-2025",
+    "imagePath": "images/mm-rag.png",
+    "position": "Rank 40 out of 500 + Poster Presentation in KDD"
+  }
+]
