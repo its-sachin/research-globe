@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   // Relative base makes the built site work when hosted under a subpath (e.g. GitHub Pages)
   // and also when previewed locally from any URL prefix.
-  base: './',
+  // Set base to the repository name so assets load correctly from GitHub Pages
+  base: '/research-globe/',
   plugins: [react()],
   server: {
     port: 3000,
