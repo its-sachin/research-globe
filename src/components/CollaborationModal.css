@@ -1,0 +1,101 @@
+.collab-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.collab-modal-content {
+  width: min(820px, 100%);
+  max-height: 85vh;
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.45));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.collab-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 0;
+}
+
+.collab-modal-title {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.collab-modal-subtitle {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.collab-modal-close {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.collab-modal-body {
+  padding: 12px 18px 18px;
+}
+
+.collab-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.collab-modal-tag {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.collab-modal-description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.55;
+}
+
+.collab-modal-people {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 13px;
+}
+
+.collab-modal-people-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.collab-modal-link {
+  margin-top: 14px;
+}
+
+.collab-modal-link a {
+  color: rgba(244, 189, 62, 0.95);
+  text-decoration: none;
+}
+
+.collab-modal-link a:hover {
+  text-decoration: underline;
+}
