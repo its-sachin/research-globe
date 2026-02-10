@@ -8,7 +8,7 @@ process.exit(1);
 
 const repoRoot = process.cwd();
 const OUT_DIR = path.join(repoRoot, 'content');
-const OUT_PATH = path.join(OUT_DIR, 'knowledge_bay_content.xlsx');
+const OUT_PATH = path.join(OUT_DIR, 'knowledge_bay_content_local.xlsx');
 
 function asString(value) {
   if (value == null) return '';
@@ -205,25 +205,56 @@ async function main() {
   // This keeps the template stable even after the app switches to Excel-driven content.
   const conferenceData = await loadExistingPublicationsJson();
   const pubRows = [];
-  for (const conf of conferenceData) {
-    for (const paper of conf.papers ?? []) {
-      pubRows.push({
-        'Conference ID': conf.id,
-        City: conf.city,
-        Country: conf.country,
-        Lat: conf.lat,
-        Lng: conf.lng,
-        'Conference Name': conf.conferenceName,
-        Date: conf.date,
-        'Paper ID': paper.id,
-        'Paper Title': paper.title,
-        Topic: paper.topic,
-        Authors: Array.isArray(paper.authors) ? paper.authors.join('; ') : asString(paper.authors),
-        Abstract: paper.abstract,
-        Year: paper.year,
-        DOI: paper.doi ?? '',
-        Keywords: Array.isArray(paper.keywords) ? paper.keywords.join('; ') : asString(paper.keywords)
-      });
+
+  const first = Array.isArray(conferenceData) ? conferenceData[0] : null;
+  const isNewSchema = Boolean(first && typeof first === 'object' && Array.isArray(first.conferences));
+
+  if (isNewSchema) {
+    for (const venue of conferenceData) {
+      for (const conf of venue.conferences ?? []) {
+        for (const paper of conf.papers ?? []) {
+          pubRows.push({
+            'Conference ID': conf.conferenceId,
+            City: venue.city,
+            Country: venue.country,
+            Lat: venue.lat,
+            Lng: venue.lng,
+            'Conference Name': conf.conferenceName,
+            Date: conf.date,
+            'Paper ID': paper.id,
+            'Paper Title': paper.title,
+            Topic: paper.topic,
+            Authors: Array.isArray(paper.authors) ? paper.authors.join('; ') : asString(paper.authors),
+            Abstract: paper.abstract,
+            Year: paper.year,
+            DOI: paper.doi ?? '',
+            Keywords: Array.isArray(paper.keywords) ? paper.keywords.join('; ') : asString(paper.keywords)
+          });
+        }
+      }
+    }
+  } else {
+    // Backward compatibility: old schema was a flat list keyed by conference id.
+    for (const conf of conferenceData) {
+      for (const paper of conf.papers ?? []) {
+        pubRows.push({
+          'Conference ID': conf.id,
+          City: conf.city,
+          Country: conf.country,
+          Lat: conf.lat,
+          Lng: conf.lng,
+          'Conference Name': conf.conferenceName,
+          Date: conf.date,
+          'Paper ID': paper.id,
+          'Paper Title': paper.title,
+          Topic: paper.topic,
+          Authors: Array.isArray(paper.authors) ? paper.authors.join('; ') : asString(paper.authors),
+          Abstract: paper.abstract,
+          Year: paper.year,
+          DOI: paper.doi ?? '',
+          Keywords: Array.isArray(paper.keywords) ? paper.keywords.join('; ') : asString(paper.keywords)
+        });
+      }
     }
   }
 

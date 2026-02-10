@@ -6,6 +6,13 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+
+  --landing-hero-frame: clamp(240px, min(52vw, 46vh), 400px);
+  --landing-circle: calc(var(--landing-hero-frame) * 0.8);
+  --landing-logo: calc(var(--landing-hero-frame) * 0.5);
+  --landing-ring-1: calc(var(--landing-hero-frame) * 1.05);
+  --landing-ring-2: calc(var(--landing-hero-frame) * 1.2);
+  --landing-ring-3: calc(var(--landing-hero-frame) * 1.35);
 }
 
 .landing-particles {
@@ -22,26 +29,31 @@
 .landing-content {
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 150px;
+  width: min(920px, 100%);
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  align-content: center;
+  row-gap: clamp(64px, 11vh, 170px);
+  padding: clamp(24px, 6vh, 64px) 24px;
   text-align: center;
   pointer-events: auto;
 }
 
 /* Spacer where the shared MastercardHero renders above this page */
-.landing-hero-spacer {
-  width: 400px;
-  height: 400px;
+.landing-hero-spacer,
+.landing-hero-slot {
+  width: var(--landing-hero-frame);
+  height: var(--landing-hero-frame);
+  display: grid;
+  place-items: center;
 }
 
 /* Circle and Logo Container */
 .landing-circle-container {
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: var(--landing-hero-frame);
+  height: var(--landing-hero-frame);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,21 +68,21 @@
 }
 
 .ring-1 {
-  width: 420px;
-  height: 420px;
+  width: var(--landing-ring-1);
+  height: var(--landing-ring-1);
   animation-delay: 0s;
 }
 
 .ring-2 {
-  width: 480px;
-  height: 480px;
+  width: var(--landing-ring-2);
+  height: var(--landing-ring-2);
   animation-delay: 0.5s;
   border-color: rgba(255, 170, 0, 0.2);
 }
 
 .ring-3 {
-  width: 540px;
-  height: 540px;
+  width: var(--landing-ring-3);
+  height: var(--landing-ring-3);
   animation-delay: 1s;
   border-color: rgba(255, 170, 0, 0.15);
 }
@@ -89,8 +101,8 @@
 /* Main Circle */
 .landing-circle {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: var(--landing-circle);
+  height: var(--landing-circle);
   border-radius: 50%;
   background: radial-gradient(135% 135% at 50% 0%, rgba(255, 170, 0, 0.15) 0%, rgba(255, 170, 0, 0.05) 50%, rgba(20, 20, 40, 0.4) 100%);
   border: 2px solid rgba(255, 170, 0, 0.3);
@@ -105,8 +117,8 @@
 
 /* Logo inside circle */
 .landing-logo {
-  width: 200px;
-  height: 200px;
+  width: var(--landing-logo);
+  height: var(--landing-logo);
   object-fit: contain;
   filter: drop-shadow(0 0 20px rgba(255, 170, 0, 0.4));
   animation: none;
@@ -126,7 +138,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 0px;
 }
 
 .landing-welcome-text {
@@ -153,6 +165,12 @@
   margin: 0;
   letter-spacing: 1px;
   font-weight: 300;
+}
+
+.landing-subtitle--hidden {
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* Start Button */
@@ -224,43 +242,8 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .landing-hero-spacer {
-    width: 300px;
-    height: 300px;
-  }
-
-  .landing-circle-container {
-    width: 300px;
-    height: 300px;
-  }
-
   .circle-ring {
     border-width: 0.75px;
-  }
-
-  .ring-1 {
-    width: 320px;
-    height: 320px;
-  }
-
-  .ring-2 {
-    width: 360px;
-    height: 360px;
-  }
-
-  .ring-3 {
-    width: 400px;
-    height: 400px;
-  }
-
-  .landing-circle {
-    width: 240px;
-    height: 240px;
-  }
-
-  .landing-logo {
-    width: 150px;
-    height: 150px;
   }
 
   .landing-welcome-text {
@@ -278,38 +261,8 @@
 }
 
 @media (max-width: 480px) {
-  .landing-circle-container {
-    width: 250px;
-    height: 250px;
-  }
-
   .circle-ring {
     border-width: 0.5px;
-  }
-
-  .ring-1 {
-    width: 270px;
-    height: 270px;
-  }
-
-  .ring-2 {
-    width: 300px;
-    height: 300px;
-  }
-
-  .ring-3 {
-    width: 330px;
-    height: 330px;
-  }
-
-  .landing-circle {
-    width: 200px;
-    height: 200px;
-  }
-
-  .landing-logo {
-    width: 120px;
-    height: 120px;
   }
 
   .landing-welcome-text {

@@ -125,6 +125,23 @@ const AIEvolutionCardCarousel: React.FC<AIEvolutionCardCarouselProps> = ({
       </div>
 
       <div className="ai-evo-carousel-stage">
+        {length > 1 && (
+          <div className="ai-evo-carousel-clickzones" aria-hidden="true">
+            <button
+              type="button"
+              className="ai-evo-clickzone ai-evo-clickzone-left"
+              tabIndex={-1}
+              onClick={focusPrev}
+            />
+            <button
+              type="button"
+              className="ai-evo-clickzone ai-evo-clickzone-right"
+              tabIndex={-1}
+              onClick={focusNext}
+            />
+          </div>
+        )}
+
         {orderedCards.map(({ card, index }) => {
           const slot = slotFor(index, activeIndex, length);
           const isCenter = slot === 'center';
@@ -133,8 +150,8 @@ const AIEvolutionCardCarousel: React.FC<AIEvolutionCardCarouselProps> = ({
             slot === 'center'
               ? { x: 0, scale: 1, rotateY: 0, z: 0, opacity: 1 }
               : slot === 'left'
-                ? { x: -220, scale: 0.92, rotateY: 18, z: -90, opacity: 0.72 }
-                : { x: 220, scale: 0.92, rotateY: -18, z: -90, opacity: 0.72 };
+                ? { x: -270, scale: 0.92, rotateY: 18, z: -90, opacity: 0.72 }
+                : { x: 270, scale: 0.92, rotateY: -18, z: -90, opacity: 0.72 };
 
           return (
             <motion.button
@@ -168,30 +185,59 @@ const AIEvolutionCardCarousel: React.FC<AIEvolutionCardCarouselProps> = ({
               <span className="ai-evo-card-sheen" aria-hidden="true" />
               <span className="ai-evo-card-border" aria-hidden="true" />
 
-              <div className="ai-evo-card-icon" aria-hidden="true">
-                {card.icon}
-              </div>
-
-              <div className="ai-evo-card-text">
-                <div className="ai-evo-card-title">{card.title}</div>
-                <div className="ai-evo-card-desc">{card.description}</div>
-              </div>
-
-              <div className="ai-evo-card-meta" aria-hidden="true">
-                <span className="ai-evo-meta-dot" />
-                <span className="ai-evo-meta-dot" />
-                <span className="ai-evo-meta-dot" />
-              </div>
-
-              {isCenter ? (
-                <div className="ai-evo-card-cta" aria-hidden="true">
-                  Enter →
+              <div className="ai-evo-card-content ai-evo-card-content-sharp">
+                <div className="ai-evo-card-icon" aria-hidden="true">
+                  {card.icon}
                 </div>
-              ) : (
-                <div className="ai-evo-card-cta" aria-hidden="true">
-                  Focus
+
+                <div className="ai-evo-card-text">
+                  <div className="ai-evo-card-title">{card.title}</div>
+                  <div className="ai-evo-card-desc">{card.description}</div>
                 </div>
-              )}
+
+                <div className="ai-evo-card-meta" aria-hidden="true">
+                  <span className="ai-evo-meta-dot" />
+                  <span className="ai-evo-meta-dot" />
+                  <span className="ai-evo-meta-dot" />
+                </div>
+
+                {isCenter ? (
+                  <div className="ai-evo-card-cta" aria-hidden="true">
+                    Enter →
+                  </div>
+                ) : (
+                  <div className="ai-evo-card-cta" aria-hidden="true">
+                    Focus
+                  </div>
+                )}
+              </div>
+
+              <div className="ai-evo-card-content ai-evo-card-content-blur" aria-hidden="true">
+                <div className="ai-evo-card-icon" aria-hidden="true">
+                  {card.icon}
+                </div>
+
+                <div className="ai-evo-card-text">
+                  <div className="ai-evo-card-title">{card.title}</div>
+                  <div className="ai-evo-card-desc">{card.description}</div>
+                </div>
+
+                <div className="ai-evo-card-meta" aria-hidden="true">
+                  <span className="ai-evo-meta-dot" />
+                  <span className="ai-evo-meta-dot" />
+                  <span className="ai-evo-meta-dot" />
+                </div>
+
+                {isCenter ? (
+                  <div className="ai-evo-card-cta" aria-hidden="true">
+                    Enter →
+                  </div>
+                ) : (
+                  <div className="ai-evo-card-cta" aria-hidden="true">
+                    Focus
+                  </div>
+                )}
+              </div>
             </motion.button>
           );
         })}
@@ -214,7 +260,7 @@ const AIEvolutionCardCarousel: React.FC<AIEvolutionCardCarouselProps> = ({
       )}
 
       <div className="ai-evo-carousel-hint" aria-hidden="true">
-        Hover to pause • Click side cards to focus • Enter to open
+        Hover to pause • Click outside the center card to focus • Enter to open
       </div>
     </div>
   );

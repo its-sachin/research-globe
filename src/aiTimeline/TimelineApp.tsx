@@ -1,8 +1,8 @@
 // src/App.jsx
 import './i18n';
 import { Suspense, lazy, useState } from "react";
-// import Starfield from "./components/Starfield";
-import Starfield from "./components/EmergentBackground";
+// Timeline bundle originally included its own animated background.
+// In this integrated app, we use the shared GridBackground instead.
 // import Timeline from "./components/Timeline"; // REMOVE this import
 import { useTranslation } from "react-i18next";
 
@@ -20,25 +20,27 @@ export default function App() {
       <div className="relative">
         {/* Language switcher removed: site is English-only */}
 
-        {/* Starfield canvas behind everything - DISABLED */}
-        <Starfield />
-
         <div className="relative z-10 w-full">
           {/* Hero Section */}
-          <section id="hero" className="relative w-full h-[75vh] pt-16">
-            {/* Background Image */}
+          <section
+            id="hero"
+            className="relative w-full pt-16"
+            style={{ paddingBottom: 40 }}
+          >
+            {/* Full-width background image */}
             <div className="absolute inset-0 w-full h-full">
               <img
                 src={heroImageUrl}
                 alt={t("hero.imageAlt", "AI Background")}
                 className="w-full h-full object-cover"
+                style={{ opacity: 0.35 }}
               />
               {/* Overlay for better text readability */}
-              <div className="absolute inset-0 bg-black/50"></div>
+              <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.30)' }} />
             </div>
-            
+
             {/* Text content positioned above background */}
-            <div className="relative z-10 flex items-center justify-center h-full px-6 md:px-16">
+            <div className="relative z-10 flex items-center justify-center px-6 md:px-16">
               <div className="max-w-3xl text-center">
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal text-white leading-tight mb-6">
                   {t("hero.title", "The Evolution of AI")}
@@ -59,6 +61,8 @@ export default function App() {
                     {autoScroll ? "⏸ Pause" : "Explore the timeline"}
                   </button>
                 </div>
+
+                <div aria-hidden="true" style={{ height: 24 }} />
               </div>
             </div>
           </section>

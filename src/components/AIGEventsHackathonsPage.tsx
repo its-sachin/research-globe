@@ -127,7 +127,9 @@ const AIGEventsHackathonsPage: React.FC<AIGEventsHackathonsPageProps> = ({ mode,
                     aria-label="Previous"
                     title="Previous"
                   >
-                    ‹
+                    <span className="aig-events-nav-icon" aria-hidden="true">
+                      ‹
+                    </span>
                   </button>
 
                   <div className="aig-events-card-shell">
@@ -195,7 +197,9 @@ const AIGEventsHackathonsPage: React.FC<AIGEventsHackathonsPageProps> = ({ mode,
                     aria-label="Next"
                     title="Next"
                   >
-                    ›
+                    <span className="aig-events-nav-icon" aria-hidden="true">
+                      ›
+                    </span>
                   </button>
                 </div>
 

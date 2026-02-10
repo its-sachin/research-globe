@@ -7,7 +7,7 @@ import hackathonsJson from './generated/hackathons.json';
 import universityCollaborationsJson from './generated/university-collaborations.json';
 import publicationsJson from './generated/publications.json';
 
-import type { ConferenceLocation, UniversityCollaborationLocation } from '../types';
+import type { PublicationVenueLocation, UniversityCollaborationLocation } from '../types';
 
 export type PageCopyEntry = { text: string; iconKey?: string };
 export type PageCopyMap = Record<string, PageCopyEntry>;
@@ -28,7 +28,7 @@ export type AppContent = {
   events: Array<{ name: string; destination: string; description: string; link: string; imagePath: string }>;
   hackathons: Array<{ name: string; destination: string; description: string; link: string; imagePath: string; position?: string }>;
   universityCollaborations: UniversityCollaborationLocation[];
-  publications: ConferenceLocation[];
+  publications: PublicationVenueLocation[];
 };
 
 export const content: AppContent = {
@@ -39,7 +39,7 @@ export const content: AppContent = {
   events: eventsJson,
   hackathons: hackathonsJson,
   universityCollaborations: universityCollaborationsJson,
-  publications: publicationsJson as unknown as ConferenceLocation[]
+  publications: publicationsJson as unknown as PublicationVenueLocation[]
 };
 
 export function formatTemplate(text: string, vars: Record<string, string>): string {

@@ -70,8 +70,6 @@ const AIEvolutionLanding: React.FC<AIEvolutionLandingProps> = ({ onSelectTopic, 
           Home
         </button>
 
-        <div className="evolution-hero-spacer" aria-hidden="true" />
-
         <div className="evolution-cards-section">
           <div className="evolution-carousel-section">
             <AIEvolutionCardCarousel

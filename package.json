@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
+    "push:gh-pages-deploy": "node scripts/git/push-gh-pages-deploy.mjs",
+    "push:code": "npm run push:gh-pages-deploy",
     "excel:convert": "node scripts/excel/convert.mjs",
     "excel:migrate:university": "node scripts/excel/migrate-university-collaborations.mjs"
   },

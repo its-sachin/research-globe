@@ -14,13 +14,14 @@ import AIGUniversityCollaborationsPage from './components/AIGUniversityCollabora
 import MastercardHero from './components/MastercardHero';
 import MastercardAIProductsView from './components/MastercardAIProductsView';
 import AITimelineView from './aiTimeline/AITimelineView';
-import { conferenceData } from './data';
-import { ConferenceLocation } from './types';
+import { publicationVenues } from './data';
+import { PublicationVenueLocation } from './types';
 import { content, formatTemplate } from './content/content';
+import mcLogoUrl from '../assets/mc_logo.png';
 import './App.css';
 
 function App() {
-  const [selectedLocation, setSelectedLocation] = useState<ConferenceLocation | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<PublicationVenueLocation | null>(null);
   const [selectedTopicId, setSelectedTopicId] = useState<string>('all');
   const [view, setView] = useState<'initial' | 'landing' | 'ai-evolution' | 'ai-timeline' | 'aig-bridge' | 'aig-events' | 'aig-university' | 'globe' | 'mc-products'>('initial');
   const [aigEventsMode, setAigEventsMode] = useState<AIGEventsMode | null>(null);
@@ -30,7 +31,7 @@ function App() {
     []
   );
 
-  const handleLocationClick = (location: ConferenceLocation) => {
+  const handleLocationClick = (location: PublicationVenueLocation) => {
     setSelectedLocation(location);
   };
 
@@ -42,10 +43,12 @@ function App() {
     const counts = new Map<string, number>();
     let total = 0;
 
-    for (const location of conferenceData) {
-      for (const paper of location.papers) {
-        total += 1;
-        counts.set(paper.topic, (counts.get(paper.topic) ?? 0) + 1);
+    for (const venue of publicationVenues) {
+      for (const conf of venue.conferences) {
+        for (const paper of conf.papers) {
+          total += 1;
+          counts.set(paper.topic, (counts.get(paper.topic) ?? 0) + 1);
+        }
       }
     }
 
@@ -56,36 +59,44 @@ function App() {
     return [{ id: 'all', label: 'All Topics', count: total }, ...sorted];
   }, []);
 
-  const filteredConferenceData = useMemo(() => {
-    if (selectedTopicId === 'all') return conferenceData;
+  const filteredVenueData = useMemo(() => {
+    if (selectedTopicId === 'all') return publicationVenues;
 
-    return conferenceData
-      .map((location) => ({
-        ...location,
-        papers: location.papers.filter((p) => p.topic === selectedTopicId)
+    return publicationVenues
+      .map((venue) => ({
+        ...venue,
+        conferences: venue.conferences
+          .map((conf) => ({
+            ...conf,
+            papers: conf.papers.filter((p) => p.topic === selectedTopicId)
+          }))
+          .filter((conf) => conf.papers.length > 0)
       }))
-      .filter((location) => location.papers.length > 0);
+      .filter((venue) => venue.conferences.length > 0);
   }, [selectedTopicId]);
 
   useEffect(() => {
     if (!selectedLocation) return;
 
-    const stillVisible = filteredConferenceData.find((l) => l.id === selectedLocation.id);
+    const stillVisible = filteredVenueData.find((l) => l.id === selectedLocation.id);
     if (!stillVisible) {
       setSelectedLocation(null);
       return;
     }
 
     setSelectedLocation(stillVisible);
-  }, [filteredConferenceData, selectedLocation]);
+  }, [filteredVenueData, selectedLocation]);
 
   useEffect(() => {
     // Safety: if we leave the AIG Events/Hackathons page, ensure mode can't linger.
     if (view !== 'aig-events') setAigEventsMode(null);
   }, [view]);
 
-  const totalPapers = filteredConferenceData.reduce((sum, loc) => sum + loc.papers.length, 0);
-  const totalConferences = filteredConferenceData.length;
+  const totalPapers = filteredVenueData.reduce(
+    (sum, venue) => sum + venue.conferences.reduce((s, conf) => s + conf.papers.length, 0),
+    0
+  );
+  const totalConferences = filteredVenueData.reduce((sum, venue) => sum + venue.conferences.length, 0);
 
   const selectedTopicLabel = useMemo(() => {
     return topics.find((t) => t.id === selectedTopicId)?.label ?? 'All Topics';
@@ -94,23 +105,29 @@ function App() {
   const appCopy = content.pages.app;
 
   return (
-    <div className="app">
+    <div className={`app ${view === 'ai-timeline' ? 'app--ai-timeline' : ''}`}>
       {/* <ParticleBackground /> */}
-      <GridBackground hidden={view === 'initial' || view === 'ai-timeline'} />
+      <GridBackground hidden={view === 'initial'} />
 
-      {view !== 'ai-timeline' && (
-        <MastercardHero 
-          position={
-            view === 'initial' ? 'center' : 
-            view === 'mc-products' ? 'center-focus' :
-            view === 'aig-events' ? 'bottom-left' :
-            view === 'aig-bridge' ? 'center-mid' :
-            view === 'ai-evolution' ? 'left' : 
-            'bottom-left'
-          } 
-          mode={view === 'mc-products' ? 'products' : 'default'}
-        />
-      )}
+      <img
+        className="mc-top-right-logo"
+        src={mcLogoUrl}
+        alt="Mastercard"
+        draggable={false}
+      />
+
+      <MastercardHero 
+        position={
+          view === 'initial' ? 'center-particles' : 
+          view === 'mc-products' ? 'center-focus' :
+          view === 'aig-events' ? 'bottom-left' :
+          view === 'aig-bridge' ? 'center-mid' :
+          view === 'ai-evolution' ? 'bottom-left' :
+          view === 'ai-timeline' ? 'bottom-left' :
+          'bottom-left'
+        } 
+        mode={view === 'mc-products' ? 'products' : 'default'}
+      />
 
       <div className="content">
         <AnimatePresence mode="wait" initial={false}>
@@ -308,7 +325,7 @@ function App() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <ResearchGlobe data={filteredConferenceData} onLocationClick={handleLocationClick} />
+                    <ResearchGlobe data={filteredVenueData} onLocationClick={handleLocationClick} />
                   </motion.div>
                 </AnimatePresence>
               </motion.div>

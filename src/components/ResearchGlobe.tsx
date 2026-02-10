@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Globe from 'react-globe.gl';
-import { ConferenceLocation } from '../types';
+import { PublicationVenueLocation } from '../types';
 import './GlobeMarkers.css';
 
 interface ResearchGlobeProps {
-  data: ConferenceLocation[];
-  onLocationClick: (location: ConferenceLocation) => void;
+  data: PublicationVenueLocation[];
+  onLocationClick: (location: PublicationVenueLocation) => void;
 }
 
 const ResearchGlobe: React.FC<ResearchGlobeProps> = ({ data, onLocationClick }) => {
@@ -73,7 +73,7 @@ const ResearchGlobe: React.FC<ResearchGlobeProps> = ({ data, onLocationClick }) 
       style={{
         width: '100%',
         height: '100%',
-        minHeight: '70vh'
+        minHeight: 0
       }}
     >
       <Globe
@@ -93,10 +93,18 @@ const ResearchGlobe: React.FC<ResearchGlobeProps> = ({ data, onLocationClick }) 
         pointRadius={0.8}
         pointLabel={(d: any) => {
           const title = [d?.city, d?.country].map((s: any) => (s ?? '').toString().trim()).filter(Boolean).join(', ');
-          const subtitle = (d?.conferenceName || '').toString();
+          const conferences = Array.isArray(d?.conferences) ? d.conferences : [];
+          const conferenceCount = conferences.length;
+          const paperCount = conferences.reduce(
+            (sum: number, c: any) => sum + (Array.isArray(c?.papers) ? c.papers.length : 0),
+            0
+          );
+          const subtitle = conferenceCount
+            ? `${conferenceCount} conference${conferenceCount === 1 ? '' : 's'} • ${paperCount} paper${paperCount === 1 ? '' : 's'}`
+            : '';
           return `
             <div class="globe-tooltip">
-              <div class="globe-tooltip-title">${title || subtitle || 'Location'}</div>
+              <div class="globe-tooltip-title">${title || 'Location'}</div>
               ${subtitle ? `<div class="globe-tooltip-subtitle">${subtitle}</div>` : ''}
             </div>
           `;

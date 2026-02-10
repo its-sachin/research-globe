@@ -9,15 +9,23 @@ export interface Paper {
   keywords: string[];
 }
 
-export interface ConferenceLocation {
+export interface ConferenceInstance {
+  conferenceId: string;
+  year: number;
+  conferenceName: string;
+  date: string;
+  papers: Paper[];
+}
+
+// A single physical venue (globe marker). One venue can host multiple conferences,
+// and each conference is uniquely defined by (conferenceId, year).
+export interface PublicationVenueLocation {
   id: string;
   city: string;
   country: string;
   lat: number;
   lng: number;
-  conferenceName: string;
-  date: string;
-  papers: Paper[];
+  conferences: ConferenceInstance[];
 }
 
 export interface UniversityCollaborationLocation {

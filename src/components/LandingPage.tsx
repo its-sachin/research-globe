@@ -43,12 +43,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
+    // Slight upward bias so the particle band sits above dead center.
+    // Keep this responsive (vh-capped) so it scales across screen sizes.
+    const centerYOffset = () => -Math.min(56, canvas.height * 0.055);
+    const getCenterY = () => canvas.height / 2 + centerYOffset();
+
     // Clear canvas immediately on mount
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Pre-populate particles on page load
-    const centerY = canvas.height / 2;
     const initialParticleCount = 150;
     const PARTICLE_BASE_SPEED = 0.9;
     const PARTICLE_SPEED_VARIANCE = 0.6;
@@ -57,7 +61,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
     
     for (let i = 0; i < initialParticleCount; i++) {
       const startX = Math.random() * canvas.width;
-      const startY = centerY + (Math.random() - 0.5) * 300;
+      const startY = getCenterY() + (Math.random() - 0.5) * 300;
       
       const hueChoice = Math.random() > 0.5 ? 0 : 35; // Red or Yellow
       
@@ -84,7 +88,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
       // Spawn new particles more frequently
       if (Math.random() > 0.65) {
         const startX = -50;
-        const startY = centerY + (Math.random() - 0.5) * 300;
+        const startY = getCenterY() + (Math.random() - 0.5) * 300;
         
         const hueChoice = Math.random() > 0.5 ? 0 : 35; // Red or Yellow
         
@@ -174,7 +178,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
           </motion.h1>
 
           <motion.p
-            className="landing-subtitle"
+            className="landing-subtitle landing-subtitle--hidden"
+            aria-hidden="true"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.6 }}

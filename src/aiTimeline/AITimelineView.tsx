@@ -8,20 +8,58 @@ type AITimelineViewProps = {
 
 function ensureTimelineStyles(): { dispose: () => void; alreadyPresent: boolean } {
   const id = 'ai-timeline-styles';
+  const overrideId = 'ai-timeline-style-overrides';
   const existing = document.getElementById(id);
   if (existing) {
+    // Ensure our overrides exist even if the main stylesheet is already present.
+    if (!document.getElementById(overrideId)) {
+      const overrides = document.createElement('style');
+      overrides.id = overrideId;
+      overrides.textContent = `
+html, body {
+  background: #020409 !important;
+  background-image: none !important;
+}
+
+#emergent-canvas {
+  display: none !important;
+}
+      `.trim();
+      document.head.appendChild(overrides);
+    }
+
     return { dispose: () => {}, alreadyPresent: true };
   }
 
   const link = document.createElement('link');
   link.id = id;
   link.rel = 'stylesheet';
-  link.href = '/ai-timeline/timeline.css';
+  // Use Vite's base URL so the stylesheet resolves correctly when the app is hosted under a subpath
+  // (e.g. GitHub Pages at https://username.github.io/repo/).
+  // import.meta.env.BASE_URL is set by Vite at build time.
+  link.href = `${import.meta.env.BASE_URL}ai-timeline/timeline.css`;
   document.head.appendChild(link);
+
+  // Override the timeline's global `body` background so it matches the rest of the app.
+  // (timeline.css is a prebuilt bundle that sets its own body background-image.)
+  const overrides = document.createElement('style');
+  overrides.id = overrideId;
+  overrides.textContent = `
+html, body {
+  background: #020409 !important;
+  background-image: none !important;
+}
+
+#emergent-canvas {
+  display: none !important;
+}
+  `.trim();
+  document.head.appendChild(overrides);
 
   return {
     dispose: () => {
       link.remove();
+      overrides.remove();
     },
     alreadyPresent: false
   };
@@ -29,6 +67,19 @@ function ensureTimelineStyles(): { dispose: () => void; alreadyPresent: boolean 
 
 export default function AITimelineView({ onBack }: AITimelineViewProps) {
   const [stylesReady, setStylesReady] = useState(false);
+
+  useEffect(() => {
+    // This view relies on window/document scrolling.
+    const prevOverflowX = document.body.style.overflowX;
+    const prevOverflowY = document.body.style.overflowY;
+    document.body.style.overflowX = 'hidden';
+    document.body.style.overflowY = 'auto';
+
+    return () => {
+      document.body.style.overflowX = prevOverflowX;
+      document.body.style.overflowY = prevOverflowY;
+    };
+  }, []);
 
   useEffect(() => {
     const { alreadyPresent, dispose } = ensureTimelineStyles();

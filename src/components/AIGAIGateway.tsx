@@ -372,12 +372,12 @@ const AIGAIGateway: React.FC<AIGAIGatewayProps> = ({ onSelect, onBack, onOpenEve
       angleBase += dt * 0.00018;
       // Orbit should be an ellipse (more horizontal space than vertical).
       // Also push nodes a bit further away from the center logo.
-      const nodeHalf = 92; // generous bound to keep nodes on-screen
+      const nodeHalf = 135; // generous bound to keep nodes on-screen (accounts for larger node size)
       const maxRx = Math.max(160, Math.min(cx, w - cx) - nodeHalf - 10);
       const maxRy = Math.max(140, Math.min(cy, h - cy) - nodeHalf - 10);
 
-      const radiusX = clamp(w * 0.28, 240, maxRx);
-      const radiusY = clamp(h * 0.22, 170, maxRy);
+      const radiusX = clamp(w * 0.28, 290, maxRx);
+      const radiusY = clamp(h * 0.22, 215, maxRy);
 
       for (let i = 0; i < nodes.length; i++) {
         const a = angleBase + (i * Math.PI * 2) / nodes.length + 0.4;

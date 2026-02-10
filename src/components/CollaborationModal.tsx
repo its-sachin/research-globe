@@ -42,7 +42,7 @@ const CollaborationModal: React.FC<CollaborationModalProps> = ({ location, onClo
               <p className="modal-date">University collaboration</p>
             </div>
             <button className="close-button" onClick={onClose} aria-label="Close">
-              <span>×</span>
+              <span className="close-button-icon" aria-hidden="true">×</span>
             </button>
           </div>
 

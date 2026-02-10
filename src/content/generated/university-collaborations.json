@@ -9,9 +9,9 @@
     "focusAreas": [
       "Graph ML"
     ],
-    "description": "Placeholder: this needs to be filled",
+    "description": "Collaborating with Prof. Sayan Ranu  and Prof. Srikanta Bedathur on advanced graph ML research spanning temporal GNNs and Graph Coarsening.",
     "people": [
-      "Ankur Arora"
+      "Aakarsh, Sahil, Sonia"
     ],
     "websiteLink": "https://home.iitd.ac.in/",
     "imagePath": "Placeholder: this needs to be filled"
@@ -28,7 +28,7 @@
       "Federated learning",
       "Fair & Bias"
     ],
-    "description": "Placeholder: this needs to be filled",
+    "description": "Joint work with Prof. Lam Kwok Yan covering disentangled representation learning for tabular data, federated learning to enhance privacy and security in transaction-level AI, and systematic evaluation of fairness and bias in model outputs.",
     "people": [
       "Yatin Katyal, Maneet Singh, Nitish"
     ],
@@ -45,7 +45,7 @@
     "focusAreas": [
       "Post pandemic social analysis"
     ],
-    "description": "Placeholder: this needs to be filled",
+    "description": "Worked with Prof. Alex Pentland to analyze large-scale social and behavioral data, uncovering insights into post-pandemic societal and economic shifts.",
     "people": [
       "Aakarsh Malhotra, Ram Ganesh, Priyanka Chudasama, Soumyadeep Ghosh, Rohit Bhattacharya, Anubha Pandey, Maneet Singh"
     ],
@@ -62,7 +62,7 @@
     "focusAreas": [
       "Spending forecasting"
     ],
-    "description": "Placeholder: this needs to be filled",
+    "description": "Partnered with Prof. Aldo A. Faisal to develop AI-driven models for accurate spending prediction and behavioral forecasting.",
     "people": [
       "Puspita Majumdar, Kanishk Goyal, Bhargav Pandillapalli, Raghav Sharma"
     ],
@@ -77,9 +77,9 @@
     "lat": 42.3032884,
     "lng": -83.0646957,
     "focusAreas": [
-      "Multiple projects"
+      "Knowledge graph learning"
     ],
-    "description": "Placeholder: this needs to be filled",
+    "description": "Working with Prof. Esam Abdel-Raheem (Mitacs, University of Windsor), this collaboration focused on scalable learning over complex knowledge graphs.",
     "people": [
       "Aakarsh Malhotra"
     ],
@@ -94,64 +94,13 @@
     "lat": 43.657,
     "lng": -79.3903,
     "focusAreas": [
-      "Placeholder: this needs to be filled"
+      "Graph ML"
     ],
-    "description": "Placeholder: this needs to be filled",
+    "description": "Joint research with Prof. Dionne Aleman focusing on scalable graph analytics and real-world graph ML applications.",
     "people": [
-      "Gaurav Oberoi sidhartha"
+      "sidhartha"
     ],
     "websiteLink": "https://www.utoronto.ca/",
-    "imagePath": "Placeholder: this needs to be filled"
-  },
-  {
-    "id": "university-of-alberta",
-    "institution": "University of Alberta",
-    "city": "Alberta",
-    "country": "Canada",
-    "lat": 53.528319,
-    "lng": -113.523477,
-    "focusAreas": [
-      "Placeholder: this needs to be filled"
-    ],
-    "description": "Placeholder: this needs to be filled",
-    "people": [
-      "Suhas Powar"
-    ],
-    "websiteLink": "https://www.ualberta.ca/en/index.html",
-    "imagePath": "Placeholder: this needs to be filled"
-  },
-  {
-    "id": "university-of-victoria",
-    "institution": "University of Victoria",
-    "city": "Victoria",
-    "country": "Canada",
-    "lat": 48.45,
-    "lng": -123.3,
-    "focusAreas": [
-      "Placeholder: this needs to be filled"
-    ],
-    "description": "Placeholder: this needs to be filled",
-    "people": [
-      "Suhas Powar"
-    ],
-    "websiteLink": "https://www.uvic.ca/",
-    "imagePath": "Placeholder: this needs to be filled"
-  },
-  {
-    "id": "university-of-ai-abu-dhabi",
-    "institution": "MBZ University of AI, Abu Dhabi",
-    "city": "Masdar",
-    "country": "UAE",
-    "lat": 24.43,
-    "lng": 54.62,
-    "focusAreas": [
-      "Adversarial Attacks, Federated Learning, Causality & Graph Learning"
-    ],
-    "description": "Placeholder: this needs to be filled",
-    "people": [
-      "Ankur Saraswat"
-    ],
-    "websiteLink": "https://mbzuai.ac.ae/",
     "imagePath": "Placeholder: this needs to be filled"
   },
   {
@@ -164,11 +113,62 @@
     "focusAreas": [
       "AI & Cybersecurity"
     ],
-    "description": "Placeholder: this needs to be filled",
+    "description": "A multi-faceted collaboration delivering internships, AI & digital bootcamps, industry visits to the Mastercard Experience Centre, career talks, and hands-on workshops bridging academia and industry.",
     "people": [
       "Ankur Saraswat"
     ],
     "websiteLink": "https://www.rit.edu/dubai/",
     "imagePath": "Placeholder: this needs to be filled"
+  },
+  {
+    "id": "carleton-university",
+    "institution": "Carleton University",
+    "city": "Ontario",
+    "country": "Canada",
+    "lat": 45.3867,
+    "lng": -75.6952,
+    "focusAreas": [
+      "Graph ML"
+    ],
+    "description": "Working with Prof. Michel Barbeau on graph-based models for complex network analysis and security-focused applications.",
+    "people": [
+      "Soumyadeep Ghosh"
+    ],
+    "websiteLink": "https://carleton.ca",
+    "imagePath": ""
+  },
+  {
+    "id": "tmu",
+    "institution": "Toronto Metropolitan University",
+    "city": "Toronto",
+    "country": "Canada",
+    "lat": 43.6577,
+    "lng": -79.3792,
+    "focusAreas": [
+      "Neural Network Research and Graph ML"
+    ],
+    "description": "Collaborating with Prof. Paweł Prałat on neural network theory and graph machine learning for large-scale and dynamic networks.",
+    "people": [
+      "Soumyadeep Ghosh & Sonia Gupta"
+    ],
+    "websiteLink": "https://www.torontomu.ca",
+    "imagePath": ""
+  },
+  {
+    "id": "bishop-university",
+    "institution": "Bishop University",
+    "city": "Quebec",
+    "country": "Canada",
+    "lat": 45.3621,
+    "lng": -71.8455,
+    "focusAreas": [
+      "Graph ML"
+    ],
+    "description": "Partnering with Prof. Rachid Hedjam on graph ML for pattern recognition, with a focus on graph coreset selection for efficient learning.",
+    "people": [
+      "Sonia Gupta"
+    ],
+    "websiteLink": "https://www.ubishops.ca",
+    "imagePath": ""
   }
 ]

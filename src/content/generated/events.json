@@ -1,51 +1,58 @@
 [
   {
-    "name": "Tech Future Summit 2026",
-    "destination": "London, UK",
-    "description": "A global conference exploring emerging technologies, AI trends, and innovation leadership.",
-    "link": "https://example.com/tech-future-summit",
+    "name": "Learning on Graphs Conference Meetup",
+    "destination": "IIT Delhi",
+    "description": "",
+    "link": "https://www.linkedin.com/posts/mastercard-ai-garage_lognewdelhi-graph-meetup-activity-7268236797531279360-XnoV/",
     "imagePath": "https://picsum.photos/400/300.jpg"
   },
   {
-    "name": "Global Food Carnival",
-    "destination": "Singapore",
-    "description": "An international food festival featuring street food, celebrity chefs, and live music.",
-    "link": "https://example.com/global-food-carnival",
-    "imagePath": "https://picsum.photos/450/300.jpg"
+    "name": "WiDS Delhi x Mastercard AI Revolution",
+    "destination": "MC office",
+    "description": "",
+    "link": "https://www.linkedin.com/posts/mastercard-ai-garage_wids-wids2024-mastercard-activity-7199808312777850880-FXwV/",
+    "imagePath": "https://picsum.photos/400/300.jpg"
   },
   {
-    "name": "Mountain Adventure Expo",
-    "destination": "Denver, USA",
-    "description": "Outdoor adventure exhibition with gear demos, climbing workshops, and travel talks.",
-    "link": "https://example.com/mountain-expo",
-    "imagePath": "https://picsum.photos/500/300.jpg"
+    "name": "Kaggle Days Delhi NCR Meetup",
+    "destination": "MC office",
+    "description": "",
+    "link": "https://www.linkedin.com/posts/mastercard-ai-garage_kaggle-days-delhi-ncr-48th-meet-up-activity-7186742209109540866-dz_o/",
+    "imagePath": "https://picsum.photos/400/300.jpg"
   },
   {
-    "name": "Digital Marketing World",
-    "destination": "Berlin, Germany",
-    "description": "Industry leaders share insights on SEO, social media strategy, and performance marketing.",
-    "link": "https://example.com/digital-marketing-world",
-    "imagePath": "https://picsum.photos/600/400.jpg"
+    "name": "AI Demo Day",
+    "destination": "MC office",
+    "description": "",
+    "link": "https://www.linkedin.com/posts/mastercard-ai-garage_startups-ai-artficialintelligence-activity-7158389442934624256-XnEt/",
+    "imagePath": "https://picsum.photos/400/300.jpg"
   },
   {
-    "name": "Art & Design Biennale",
-    "destination": "Florence, Italy",
-    "description": "A celebration of contemporary art, installations, and creative design from global artists.",
-    "link": "https://example.com/art-biennale",
-    "imagePath": "https://picsum.photos/800/600.jpg"
+    "name": "GFF",
+    "destination": "Mumbai",
+    "description": "",
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7399338208053940224",
+    "imagePath": "https://picsum.photos/400/300.jpg"
   },
   {
-    "name": "Sustainable Living Fair",
-    "destination": "Vancouver, Canada",
-    "description": "Eco-friendly products, green tech showcases, and sustainability workshops.",
-    "link": "https://example.com/sustainable-living-fair",
-    "imagePath": "https://picsum.photos/320/240.jpg"
+    "name": "GPAI",
+    "destination": "Delhi",
+    "description": "",
+    "link": "https://www.linkedin.com/posts/mastercard-ai-garage_mastercard-gpai-mastercardaigarage-activity-7140303505218588672-SD16/",
+    "imagePath": "https://picsum.photos/400/300.jpg"
   },
   {
-    "name": "Indie Game Developers Con",
-    "destination": "Tokyo, Japan",
-    "description": "Independent game creators gather to showcase projects, network, and attend dev sessions.",
-    "link": "https://example.com/indie-game-con",
-    "imagePath": "https://picsum.photos/640/480.jpg"
+    "name": "Pre-summit : AI in Finance, Payments & Security",
+    "destination": "Indraprastha Institute of Information & Technology",
+    "description": "",
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7423967861880197120",
+    "imagePath": "https://picsum.photos/400/300.jpg"
+  },
+  {
+    "name": "Geekroom",
+    "destination": "MC office",
+    "description": "",
+    "link": "https://mastercard-my.sharepoint.com/:f:/p/vaibhav_lakhmani/IgBIEUVIW6Y_TbU4XzoqEaOOAeI9gHbndsHvWU4SMpcW_j8?email=Keshvi.Tomer%40mastercard.com&e=h5ecsb",
+    "imagePath": "https://picsum.photos/400/300.jpg"
   }
 ]

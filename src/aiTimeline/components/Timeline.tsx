@@ -78,76 +78,57 @@ const CardsView = React.memo(function CardsView({
   const previousActiveIndexRef = useRef(0);
   const AUTO_SCROLL_SPEED = scrollSpeed; // pixels per frame
 
-  const filteredEvents = events.filter(
-    (event) => activeCategories[event.category]
+  const filteredEvents = useMemo(
+    () => events.filter((event) => activeCategories[event.category]),
+    [events, activeCategories]
   );
   const currentEvent = filteredEvents[activeEventIndex];
 
   // Calculate which event is in view and update scroll progress
   useEffect(() => {
-    let lastScrollY = window.scrollY;
     let ticking = false;
-    let scrollTimeout;
 
-    const handleScroll = () => {
-      lastScrollY = window.scrollY;
-
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateSpinePosition(lastScrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-
-      // Debounce the active card update
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        updateActiveCard(lastScrollY);
-      }, 100); // Wait for scroll to settle
-    };
-
-    const updateActiveCard = (scrollY) => {
+    const updateActiveCardAndSpine = () => {
       if (!timelineRef.current) return;
 
-      const cards = timelineRef.current.getElementsByClassName("event-card");
+      const cards = timelineRef.current.getElementsByClassName('event-card');
+      if (!cards || cards.length === 0) return;
+
+      const scrollY = window.scrollY;
       const viewportHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const maxScroll = documentHeight - viewportHeight;
 
-      // If we're at the bottom of the page, highlight the last card
-      if (scrollY >= maxScroll - 10) {
-        setActiveEventIndex(cards.length - 1);
-        return;
-      }
-
-      const viewportMiddle = scrollY + viewportHeight / 2;
-
       // Find the card closest to the middle of the viewport
       let closestCard = 0;
-      let minDistance = Infinity;
 
-      Array.from(cards).forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
-        const cardMiddle = scrollY + rect.top + rect.height / 2;
-        const distance = Math.abs(cardMiddle - viewportMiddle);
+      if (scrollY >= maxScroll - 10) {
+        closestCard = cards.length - 1;
+      } else {
+        const viewportMiddle = scrollY + viewportHeight / 2;
+        let minDistance = Infinity;
 
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestCard = index;
-        }
-      });
+        Array.from(cards).forEach((card, index) => {
+          const rect = card.getBoundingClientRect();
+          const cardMiddle = scrollY + rect.top + rect.height / 2;
+          const distance = Math.abs(cardMiddle - viewportMiddle);
 
-      setActiveEventIndex(closestCard);
-    };
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestCard = index;
+          }
+        });
+      }
 
-    const updateSpinePosition = (scrollY) => {
-      if (!currentEvent) return;
+      if (closestCard !== activeEventIndex) setActiveEventIndex(closestCard);
+
+      const eventForSpine = filteredEvents[closestCard];
+      if (!eventForSpine) return;
 
       const currentDate = new Date(
-        currentEvent.start_date.year,
-        currentEvent.start_date.month - 1,
-        currentEvent.start_date.day
+        eventForSpine.start_date.year,
+        eventForSpine.start_date.month - 1,
+        eventForSpine.start_date.day
       );
       const startDate = new Date(SPINE_START_YEAR, 0, 1);
       const endDate = new Date(SPINE_END_YEAR, 11, 31);
@@ -155,30 +136,39 @@ const CardsView = React.memo(function CardsView({
       const daysPassed = (currentDate - startDate) / (1000 * 60 * 60 * 24);
       const progress = daysPassed / totalDays;
 
-      const viewportHeight = window.innerHeight;
-      const spineHeight = 2400;
-      const dotPosition = 60 + progress * (spineHeight - 120);
-
-      // Calculate background progress based on dot position
       const normalizedProgress = Math.max(0, Math.min(1, progress));
       setBackgroundProgress(normalizedProgress);
 
-      if (dotPosition > viewportHeight - 180) {
-        const overflow = dotPosition - (viewportHeight - 180);
-        setSpineOffset(-Math.min(overflow, spineHeight - viewportHeight));
-      } else {
-        setSpineOffset(0);
-      }
+      // Align the dot (and thus the timeline spine) to the active card's center on-screen.
+      const spineHeight = 2400;
+      const dotPosition = 60 + progress * (spineHeight - 120);
+      const activeCardEl = cards[closestCard];
+      const activeRect = activeCardEl.getBoundingClientRect();
+      const desiredDotY = activeRect.top + activeRect.height / 2;
+
+      const minOffset = -(spineHeight - viewportHeight);
+      const targetOffset = Math.max(minOffset, Math.min(0, desiredDotY - dotPosition));
+      setSpineOffset(targetOffset);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    const handleScrollOrResize = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActiveCardAndSpine();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize, { passive: true });
+    handleScrollOrResize();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
     };
-  }, [events.length, activeEventIndex, filteredEvents, currentEvent]);
+  }, [activeEventIndex, filteredEvents]);
 
   // Auto-scroll effect
   useEffect(() => {

@@ -2,9 +2,11 @@
   position: fixed;
   left: 20px;
   top: 170px;
-  bottom: 110px;
   width: 290px;
   z-index: 5;
+
+  height: auto;
+  max-height: calc(100vh - 170px - 24px);
 
   display: flex;
   flex-direction: column;
@@ -74,6 +76,8 @@
 }
 
 .topic-sidebar-list {
+  flex: 1;
+  min-height: 0;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -141,6 +145,7 @@
 }
 
 .topic-sidebar-footer {
+  margin-top: auto;
   padding: 10px 14px 14px;
   border-top: 1px solid rgba(255, 170, 0, 0.12);
 }
@@ -156,6 +161,7 @@
     left: 12px;
     top: 140px;
     width: 250px;
+    max-height: calc(100vh - 140px - 24px);
   }
 }
 

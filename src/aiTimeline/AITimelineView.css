@@ -1,13 +1,14 @@
 .ai-timeline-host {
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100vh;
   position: relative;
 }
 
 .ai-timeline-back {
   position: fixed;
   left: 20px;
-  top: 110px;
+  top: 20px;
   z-index: 1001;
 
   border: 1px solid rgba(255, 170, 0, 0.16);
@@ -43,4 +44,18 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   font-size: 13px;
+}
+
+@media (max-width: 1200px) {
+  .ai-timeline-back {
+    left: 16px;
+    top: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-timeline-back {
+    left: 12px;
+    top: 12px;
+  }
 }

@@ -1,5 +1,5 @@
 .ai-evo-carousel {
-  width: min(760px, 100%);
+  width: min(900px, 100%);
   position: relative;
   margin: 0 auto;
 
@@ -11,17 +11,17 @@
 
   padding: 26px 22px 18px;
 
-  border: 1px solid rgba(255, 170, 0, 0.14);
-  background: rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 
-  box-shadow: 0 18px 80px rgba(0, 0, 0, 0.55);
+  box-shadow: none;
 }
 
 .ai-evo-carousel:focus-visible {
   box-shadow:
-    0 18px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 rgba(0, 0, 0, 0),
     0 0 0 1px rgba(255, 170, 0, 0.28),
     0 0 0 6px rgba(255, 170, 0, 0.08);
 }
@@ -32,6 +32,8 @@
   pointer-events: none;
   overflow: hidden;
   border-radius: 26px;
+
+  display: none;
 }
 
 .ai-evo-hud-line {
@@ -60,30 +62,61 @@
 
 .ai-evo-carousel-stage {
   position: relative;
-  height: 320px;
+  height: 390px;
   display: grid;
   place-items: center;
   transform-style: preserve-3d;
+
+  --ai-evo-center-width: min(600px, 94%);
+}
+
+.ai-evo-carousel-clickzones {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.ai-evo-clickzone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc((100% - var(--ai-evo-center-width)) / 2);
+
+  background: transparent;
+  border: 0;
+  padding: 0;
+
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.ai-evo-clickzone-left {
+  left: 0;
+}
+
+.ai-evo-clickzone-right {
+  right: 0;
 }
 
 .ai-evo-card {
   --ai-evo-accent: rgba(255, 170, 0, 1);
 
   position: absolute;
-  width: min(520px, 92%);
-  height: 270px;
+  width: min(600px, 94%);
+  height: 330px;
   border-radius: 22px;
+
+  overflow: hidden;
 
   color: rgba(255, 255, 255, 0.9);
   text-align: left;
 
   border: 1px solid rgba(255, 255, 255, 0.10);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04)),
-    rgba(10, 10, 18, 0.56);
 
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  background: rgba(10, 10, 18, 0.54);
+  backdrop-filter: blur(30px) saturate(125%);
+  -webkit-backdrop-filter: blur(30px) saturate(125%);
 
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.52);
 
@@ -91,12 +124,57 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 
-  padding: 22px;
+  padding: 26px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
 
-  transform-style: preserve-3d;
+.ai-evo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04)),
+    transparent;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ai-evo-card.is-center {
+  /* Stronger blur so the back cards are more diffused at overlaps. */
+  background: rgba(10, 10, 18, 0.46);
+  backdrop-filter: blur(68px) saturate(140%);
+  -webkit-backdrop-filter: blur(68px) saturate(140%);
+}
+
+.ai-evo-card.is-center::before {
+  /* Extra blur bands near the left/right edges where intersection occurs. */
+  backdrop-filter: blur(140px) saturate(150%);
+  -webkit-backdrop-filter: blur(140px) saturate(150%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.05)),
+    rgba(0, 0, 0, 0.16);
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 22%,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 1) 78%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 22%,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 1) 78%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 .ai-evo-card::after {
@@ -107,6 +185,7 @@
   background: radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--ai-evo-accent) 26%, transparent), transparent 60%);
   opacity: 0.9;
   pointer-events: none;
+  z-index: 1;
 }
 
 .ai-evo-card-sheen {
@@ -117,6 +196,7 @@
   transform: translateX(-55%);
   opacity: 0.0;
   transition: opacity 220ms ease;
+  z-index: 3;
 }
 
 .ai-evo-card.is-center .ai-evo-card-sheen {
@@ -142,6 +222,7 @@
   );
   opacity: 0.55;
   pointer-events: none;
+  z-index: 4;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
@@ -149,9 +230,66 @@
   padding: 1px;
 }
 
+.ai-evo-card-icon,
+.ai-evo-card-text,
+.ai-evo-card-meta,
+.ai-evo-card-cta {
+  position: relative;
+  z-index: 2;
+}
+
+.ai-evo-card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ai-evo-card-content-blur {
+  position: absolute;
+  inset: 22px;
+  z-index: 2;
+  pointer-events: none;
+
+  filter: blur(14px);
+  opacity: 0.95;
+  transform: translateZ(0);
+}
+
+/* Default: blurred duplicate is hidden (center card doesn't need it). */
+.ai-evo-card.is-center .ai-evo-card-content-blur {
+  display: none;
+}
+
+/* Side cards: show blur only in the intersection band. */
+.ai-evo-card-left .ai-evo-card-content-blur {
+  display: flex;
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 58%, rgba(0,0,0,1) 74%, rgba(0,0,0,1) 100%);
+  mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 58%, rgba(0,0,0,1) 74%, rgba(0,0,0,1) 100%);
+}
+
+.ai-evo-card-right .ai-evo-card-content-blur {
+  display: flex;
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 26%, rgba(0,0,0,0) 42%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 26%, rgba(0,0,0,0) 42%, rgba(0,0,0,0) 100%);
+}
+
+/* Hide sharp content in the same intersection band so only blur shows there. */
+.ai-evo-card-left .ai-evo-card-content-sharp {
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 78%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 78%, rgba(0,0,0,0) 100%);
+}
+
+.ai-evo-card-right .ai-evo-card-content-sharp {
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 100%);
+  mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 100%);
+}
+
 .ai-evo-card-icon {
-  width: 58px;
-  height: 58px;
+  width: 64px;
+  height: 64px;
   border-radius: 16px;
   display: grid;
   place-items: center;
@@ -167,8 +305,8 @@
 }
 
 .ai-evo-card-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 }
 
 .ai-evo-card-text {
@@ -178,7 +316,7 @@
 }
 
 .ai-evo-card-title {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
   letter-spacing: 0.6px;
   font-family: var(--mc-font-sans);
@@ -195,7 +333,7 @@
 }
 
 .ai-evo-card-desc {
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.6px;
   color: rgba(255, 255, 255, 0.68);
 }
@@ -291,6 +429,8 @@
 
   .ai-evo-carousel-stage {
     height: 300px;
+
+    --ai-evo-center-width: min(480px, 94%);
   }
 
   .ai-evo-card {
@@ -304,5 +444,11 @@
 
   .ai-evo-card-desc {
     font-size: 13px;
+  }
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .ai-evo-card {
+    background: rgba(10, 10, 18, 0.86);
   }
 }

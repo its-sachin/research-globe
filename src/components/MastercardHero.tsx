@@ -4,26 +4,29 @@ import './MastercardHero.css';
 import MastercardProductBubbleEmitter, { type MastercardBubbleProduct } from './MastercardProductBubbleEmitter';
 import { content } from '../content/content';
 import { iconForKey } from '../content/iconRegistry';
-import mcLogoUrl from '../../assets/mc_logo.png';
+import aiGarageMarkUrl from '../../assets/ai-garage-mark.png';
 
-export type MastercardHeroPosition = 'center' | 'left' | 'bottom-left' | 'center-focus' | 'center-mid';
+export type MastercardHeroPosition = 'center' | 'center-particles' | 'left' | 'bottom-left' | 'center-focus' | 'center-mid';
 
 interface MastercardHeroProps {
   position: MastercardHeroPosition;
   mode?: 'default' | 'products';
+  layout?: 'fixed' | 'inline';
 }
 
 const HERO_CONTAINER_SIZE = 400;
 const HERO_HALF = HERO_CONTAINER_SIZE / 2;
 const HERO_MIN_LEFT_EDGE = 16;
-const DESIRED_LEFT_SHIFT = -580;
+const AI_EVOLUTION_CARDS_WIDTH = 760;
 
 const CENTER_FOCUS_Y_OFFSET_PX = 36;
 const CENTER_MID_Y_OFFSET_PX = 48;
 
+const landingParticleBandYOffset = (viewportHeight: number) => -Math.min(56, viewportHeight * 0.055);
+
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-const MastercardHero: React.FC<MastercardHeroProps> = ({ position, mode = 'default' }) => {
+const MastercardHero: React.FC<MastercardHeroProps> = ({ position, mode = 'default', layout = 'fixed' }) => {
   const [viewport, setViewport] = useState<{ width: number; height: number }>(() => ({
     width: window.innerWidth,
     height: window.innerHeight
@@ -36,18 +39,37 @@ const MastercardHero: React.FC<MastercardHeroProps> = ({ position, mode = 'defau
   }, []);
 
   const targetX = useMemo(() => {
-    if (position === 'center' || position === 'center-focus' || position === 'center-mid') return 0;
-    if (position === 'bottom-left') return 0; // No horizontal shift for bottom-left
+    if (layout === 'inline') return 0;
+    if (position === 'center' || position === 'center-focus' || position === 'center-mid' || position === 'center-particles') return 0;
+    if (position === 'bottom-left') return 20; // No horizontal shift for bottom-left
+
+    // Responsive/symmetric "left" position (used on the AI Evolution page):
+    // We want 3 equal spaces: leftSpace == gap == rightSpace.
+    // Given viewport width W, hero width H, cards width C:
+    //   space = (W - H - C) / 3
+    // Hero center should be at (space + H/2).
+    const viewportWidth = viewport.width;
+    const space = (viewportWidth - HERO_CONTAINER_SIZE - AI_EVOLUTION_CARDS_WIDTH) / 3;
+    const spaceClamped = Math.max(HERO_MIN_LEFT_EDGE, space);
+    const desiredHeroCenterX = spaceClamped + HERO_HALF;
+    const desiredShift = desiredHeroCenterX - viewportWidth / 2;
 
     // Keep the hero from going off-screen on smaller widths.
     // Left edge when centered is (w/2 - HERO_HALF). After translating by x, left edge becomes:
     //   (w/2 - HERO_HALF) + x
     // Enforce >= HERO_MIN_LEFT_EDGE.
     const minX = HERO_MIN_LEFT_EDGE - (viewport.width / 2 - HERO_HALF);
-    return clamp(DESIRED_LEFT_SHIFT, minX, 0);
-  }, [position, viewport.width]);
+    return clamp(desiredShift, minX, 0);
+  }, [layout, position, viewport.width]);
 
   const anchorOffset = useMemo(() => {
+    if (layout === 'inline') return { x: 0, y: 0 };
+
+    if (position === 'center-particles') {
+      // Align the hero with the landing page particle band (which is biased upward).
+      return { x: 0, y: landingParticleBandYOffset(viewport.height) };
+    }
+
     if (position === 'center-focus') {
       // Slightly lower on the AI @ Mastercard page.
       return { x: 0, y: CENTER_FOCUS_Y_OFFSET_PX };
@@ -63,7 +85,8 @@ const MastercardHero: React.FC<MastercardHeroProps> = ({ position, mode = 'defau
     // Animate the hero's center point down to the bottom-left in a way that works
     // across viewports (and avoids CSS `top:auto`/`bottom` jumps).
     const desiredCenterX = 130;
-    const desiredCenterY = clamp(viewport.height - 180, 140, viewport.height - 120);
+    // Move a bit closer to the bottom edge (used across hackathons/events/publications/etc.).
+    const desiredCenterY = clamp(viewport.height - 120, 120, viewport.height - 80);
 
     // Base anchor point is the center of the viewport.
     const baseCenterX = viewport.width / 2;
@@ -73,9 +96,10 @@ const MastercardHero: React.FC<MastercardHeroProps> = ({ position, mode = 'defau
       x: desiredCenterX - baseCenterX,
       y: desiredCenterY - baseCenterY
     };
-  }, [position, viewport.height, viewport.width]);
+  }, [layout, position, viewport.height, viewport.width]);
 
   const scale =
+    layout === 'inline' ? 1 :
     position === 'bottom-left' ? 0.35 :
     position === 'center-focus' ? 0.86 :
     position === 'center-mid' ? 0.50 :
@@ -92,7 +116,7 @@ const MastercardHero: React.FC<MastercardHeroProps> = ({ position, mode = 'defau
   );
 
   return (
-    <div className="mc-hero-anchor">
+    <div className={`mc-hero-anchor mc-hero-anchor--${layout}`}>
       <motion.div
         className="mc-hero-anchor-motion"
         animate={anchorOffset}
@@ -126,8 +150,8 @@ const MastercardHero: React.FC<MastercardHeroProps> = ({ position, mode = 'defau
               }}
             >
               <img
-                src={mcLogoUrl}
-                alt="Mastercard Logo"
+                src={aiGarageMarkUrl}
+                alt="AI Garage Mark"
                 className="mc-hero-logo"
                 draggable={false}
               />

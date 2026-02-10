@@ -1,9 +1,13 @@
 .aig-uni-page {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  padding: 110px 22px 48px;
+  height: 100vh;
+  min-height: 0;
+  padding: clamp(84px, 14vh, 110px) 22px clamp(28px, 6vh, 48px);
   color: rgba(255, 255, 255, 0.92);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .aig-uni-page::before {
@@ -89,8 +93,13 @@
 
 .aig-uni-globe {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: min(1400px, 92vw);
+  margin: clamp(10px, 1.8vh, 22px) auto 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
 
 .aig-uni-empty {
